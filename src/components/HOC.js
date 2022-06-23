@@ -30,7 +30,7 @@ const HOC = (props) => {
         // console.log("resp", resp);
         let { data } = resp;
         let newList = symbolList.map(row => {
-            if (row.streamSym === data.symbol) {
+            if (row.sym.streamSym === data.symbol) {
                 // row = Object.assign({}, row, data);
 
                 let cssClasses = {
@@ -99,9 +99,9 @@ const HOC = (props) => {
     // }
 
     function streamSub(list) {
-
+        console.log("list", list);
         const symbolArray = list.map((item) => item.sym);
-        setSymbolList(symbolArray)
+        setSymbolList(list)
         props.subscribeLevel1(symbolArray)
     }
 
@@ -114,12 +114,12 @@ const HOC = (props) => {
 
     return (<div className="table_container">
 
-        <p className="company_name">Company Name: <b> {company_name} </b></p>
+        {/* <p className="company_name">Company Name: <b> {company_name} </b></p> */}
 
         <table>
             <thead>
                 <tr>
-                    <th>S.No</th>
+                    <th>Display Name</th>
                     <th>LTP</th>
                     <th>CHNG</th>
                     <th>CHNGPER</th>
@@ -131,7 +131,7 @@ const HOC = (props) => {
                     symbolList.map((item, index) => {
 
                         return <tr key={index}>
-                            <td>{index + 1}</td>
+                            <td>{item.dispSym}</td>
                             <td>{
                                 <span className={item.ltpClasses}> {item.ltp} </span>
                             }</td>
